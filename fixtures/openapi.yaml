@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: Vulcain Fixtures
+  version: 1.0.0
+paths:
+  /oa/books.json:
+    get:
+      responses:
+        default:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  member:
+                    type: array
+                    items:
+                      type: integer
+          links:
+            book:
+              # TODO: operationRef isn't supported yet
+              #operationRef: '#/paths/~1oa~1books~1{id}/get'
+              operationId: getBook
+              parameters:
+                id: '$response.body#/member/*'
+  '/oa/books/{id}':
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+    get:
+      operationId: getBook
+      responses:
+        '103':
+          description: continue
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/book'
+          links:
+            foo:
+            author:
+              # TODO: operationRef isn't supported yet
+              #operationRef: '#/paths/~1oa~1authors~1{id}/get'
+              operationId: getAuthor
+              parameters:
+                id: '$response.body#/author'
+  '/oa/authors/{id}':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getAuthor
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/author'
+components:
+  schemas:
+    author:
+      title: author
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    book:
+      title: book
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        author:
+          type: integer
