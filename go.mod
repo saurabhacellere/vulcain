@@ -13,9 +13,7 @@ require (
 	github.com/stretchr/testify v1.3.0
 	github.com/tidwall/gjson v1.3.2
 	github.com/tidwall/sjson v1.0.4
-	golang.org/x/crypto v0.0.0-20190907121410-71b5226ff739
-	golang.org/x/net v0.0.0-20190909003024-a7b16738d86b
-	golang.org/x/sys v0.0.0-20190907184412-d223b2b6db03 // indirect
-	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+	golang.org/x/net v0.7.0
 	google.golang.org/genproto v0.0.0-20190905072037-92dd089d5514 // indirect
 )
